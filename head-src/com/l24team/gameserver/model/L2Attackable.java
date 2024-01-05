@@ -2660,7 +2660,6 @@ public class L2Attackable extends L2NpcInstance
 	{
 		// This just works for targets like L2MonsterInstance
 		
-		
 		// The attacker must not be null
 		// This L2Attackable must be of one type in the absorbingMOBS_levelXX tables.
 		// OBS: This is done so to avoid triggering the absorbed conditions for mobs that can't be absorbed.

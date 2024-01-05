@@ -919,16 +919,7 @@ public abstract class L2Character extends L2Object implements ISkillsHolder
 			return;
 		}
 		
-		if (this instanceof L2PcInstance && target.isDead() && !target.isFakeDeath())
-		{
-			// If L2PcInstance is dead or the target is dead, the action is stoped
-			getAI().setIntention(CtrlIntention.AI_INTENTION_ACTIVE);
-			
-			sendPacket(ActionFailed.STATIC_PACKET);
-			return;
-		}
-		
-		if (!getKnownList().knowsObject(target))
+		if ((this instanceof L2PcInstance && target.isDead() && !target.isFakeDeath()) || !getKnownList().knowsObject(target))
 		{
 			// If L2PcInstance is dead or the target is dead, the action is stoped
 			getAI().setIntention(CtrlIntention.AI_INTENTION_ACTIVE);
@@ -7448,18 +7439,13 @@ public abstract class L2Character extends L2Object implements ISkillsHolder
 			}
 		}
 		
-		if (attacker instanceof L2Character && ((L2Character) attacker).isInsideZone(ZONE_PEACE)
+		if ((attacker instanceof L2Character && ((L2Character) attacker).isInsideZone(ZONE_PEACE)
 		// the townzone has to be already peace zone
 		// || TownManager.getInstance().getTown(attacker.getX(), attacker.getY(), attacker.getZ())!= null
-		)
-		{
-			return true;
-		}
-		
-		if (target instanceof L2Character && ((L2Character) target).isInsideZone(ZONE_PEACE)
+		) || (target instanceof L2Character && ((L2Character) target).isInsideZone(ZONE_PEACE)
 		// the townzone has to be already peace zone
 		// || TownManager.getInstance().getTown(target.getX(), target.getY(), target.getZ())!= null
-		)
+		))
 		{
 			return true;
 		}

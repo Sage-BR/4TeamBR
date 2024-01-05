@@ -7385,13 +7385,8 @@ public class L2PcInstance extends L2PlayableInstance
 		}
 		
 		// If in duel and you kill (only can kill l2summon), do nothing
-		if (isInDuel() && targetPlayer.isInDuel())
-		{
-			return;
-		}
-		
 		// If in Arena, do nothing
-		if (isInsideZone(ZONE_PVP) || targetPlayer.isInsideZone(ZONE_PVP))
+		if ((isInDuel() && targetPlayer.isInDuel()) || isInsideZone(ZONE_PVP) || targetPlayer.isInsideZone(ZONE_PVP))
 		{
 			return;
 		}
@@ -10097,17 +10092,7 @@ public class L2PcInstance extends L2PlayableInstance
 			
 			for (final L2Effect effect : effects)
 			{
-				if (effect == null)
-				{
-					continue;
-				}
-				
-				if (effect.getEffectType() == L2Effect.EffectType.HEAL_OVER_TIME)
-				{
-					continue;
-				}
-				
-				if (effect.getEffectType() == L2Effect.EffectType.COMBAT_POINT_HEAL_OVER_TIME)
+				if ((effect == null) || (effect.getEffectType() == L2Effect.EffectType.HEAL_OVER_TIME) || (effect.getEffectType() == L2Effect.EffectType.COMBAT_POINT_HEAL_OVER_TIME))
 				{
 					continue;
 				}
@@ -11198,14 +11183,8 @@ public class L2PcInstance extends L2PlayableInstance
 				if (siege != null)
 				{
 					// Check if a siege is in progress and if attacker and the L2PcInstance aren't in the Defender clan
-					if (siege.checkIsDefender(((L2PcInstance) attacker).getClan()) && siege.checkIsDefender(getClan()))
-					{
-						siege = null;
-						return false;
-					}
-					
 					// Check if a siege is in progress and if attacker and the L2PcInstance aren't in the Attacker clan
-					if (siege.checkIsAttacker(((L2PcInstance) attacker).getClan()) && siege.checkIsAttacker(getClan()))
+					if ((siege.checkIsDefender(((L2PcInstance) attacker).getClan()) && siege.checkIsDefender(getClan())) || (siege.checkIsAttacker(((L2PcInstance) attacker).getClan()) && siege.checkIsAttacker(getClan())))
 					{
 						siege = null;
 						return false;
@@ -11214,14 +11193,8 @@ public class L2PcInstance extends L2PlayableInstance
 				if (fortsiege != null)
 				{
 					// Check if a siege is in progress and if attacker and the L2PcInstance aren't in the Defender clan
-					if (fortsiege.checkIsDefender(((L2PcInstance) attacker).getClan()) && fortsiege.checkIsDefender(getClan()))
-					{
-						fortsiege = null;
-						return false;
-					}
-					
 					// Check if a siege is in progress and if attacker and the L2PcInstance aren't in the Attacker clan
-					if (fortsiege.checkIsAttacker(((L2PcInstance) attacker).getClan()) && fortsiege.checkIsAttacker(getClan()))
+					if ((fortsiege.checkIsDefender(((L2PcInstance) attacker).getClan()) && fortsiege.checkIsDefender(getClan())) || (fortsiege.checkIsAttacker(((L2PcInstance) attacker).getClan()) && fortsiege.checkIsAttacker(getClan())))
 					{
 						fortsiege = null;
 						return false;
@@ -11672,14 +11645,8 @@ public class L2PcInstance extends L2PlayableInstance
 		// ************************************* Check Casting Conditions *******************************************
 		
 		// Check if the caster own the weapon needed
-		if (!skill.getWeaponDependancy(this))
-		{
-			// Send a Server->Client packet ActionFailed to the L2PcInstance
-			sendPacket(ActionFailed.STATIC_PACKET);
-			return;
-		}
 		// Check if all casting conditions are completed
-		if (!skill.checkCondition(this, target, false))
+		if (!skill.getWeaponDependancy(this) || !skill.checkCondition(this, target, false))
 		{
 			// Send a Server->Client packet ActionFailed to the L2PcInstance
 			sendPacket(ActionFailed.STATIC_PACKET);

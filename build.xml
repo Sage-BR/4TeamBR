@@ -9,71 +9,60 @@
 	<property name="lib" location="lib" />
 
 	<path id="classpath">
-		<fileset dir="${lib}">
+		<fileset dir="lib">
 			<include name="*.jar" />
 		</fileset>
 	</path>
 	
 	<target name="init" description="Create the output directories.">
-		<property name="build" location="build" />
-		<property name="build.bin" location="${build}/bin" />
-		<property name="build.core" location="${build}/4TeamBR.jar" />
-		<property name="build.dist" location="${build}/dist" />
-		<property name="build.dist.loginserver.lib" location="${build.dist}/loginserver/lib" />
-		<property name="build.dist.loginserver.log" location="${build.dist}/loginserver/log" />
-		<property name="build.dist.gameserver.lib" location="${build.dist}/gameserver/lib" />
-		<property name="build.dist.gameserver.log" location="${build.dist}/gameserver/log" />
-		<property name="dist" location="dist" />
-		<property name="lib" location="lib" />
-		
-		<delete file="${build}/L2J4Team_Source.zip" quiet="true" />
-		<mkdir dir="${build.bin}" />
+		<mkdir dir="build/bin" />
+		<delete file="build/L2J4Team_Source.zip" quiet="true" />
 	</target>
 
 	<target name="compile" description="Compile the source.">
-		<javac destdir="${build.bin}" includeantruntime="false" debug="on" encoding="utf-8" nowarn="off">
-			<src path="${src}" />
+		<javac destdir="build/bin" includeantruntime="false" debug="on" encoding="utf-8" nowarn="off">
+			<src path="head-src" />
 			<classpath refid="classpath" />
 		</javac>
 	</target>
 
 	<target name="jar" depends="compile" description="Create the jar file">
-		<jar destfile="${build}/4TeamBR.jar">
-			<fileset dir="${build.bin}" />
+		<jar destfile="build/4TeamBR.jar">
+			<fileset dir="build/bin" />
 		</jar>
 	</target>
 
 	<target name="adding-core" depends="jar" description="Adding the compiled jar to the Zip file.">
 		
-		<mkdir dir="${build.dist.loginserver.log}" />
-		<mkdir dir="${build.dist.gameserver.log}" />
+		<mkdir dir="build/dist/loginserver/log" />
+		<mkdir dir="build/dist/gameserver/log" />
 		
-		<copy file="${build.core}" todir="${build.dist.loginserver.lib}"/>
-		<copy file="${build.core}" todir="${build.dist.gameserver.lib}"/>
+		<copy file="build/4TeamBR.jar" todir="build/dist/loginserver/lib"/>
+		<copy file="build/4TeamBR.jar" todir="build/dist/gameserver/lib"/>
 		
-		<copy todir="${build.dist.loginserver.lib}">
-			<fileset dir="${lib}">
+		<copy todir="build/dist/loginserver/lib">
+			<fileset dir="lib">
 				<include name="*.jar" />
 			</fileset>
 		</copy>
 		
-		<copy todir="${build.dist.gameserver.lib}">
-			<fileset dir="${lib}">
+		<copy todir="build/dist/gameserver/lib">
+			<fileset dir="lib">
 				<include name="*.jar" />
 			</fileset>
 		</copy>
 		
-		<zip destfile="${build}/l24team.zip" basedir="${build.dist}" update="true" />
+		<zip destfile="build/L24Team_Source.zip" basedir="build/dist" update="true" />
 	</target>
 	
 	<target name="adding-datapack" depends="adding-core" description="Updating the Zip file with datapack content.">
-		<zip destfile="${build}/l24team.zip" basedir="${dist}" update="true" excludes="gameserver/log/**, loginserver/log/**,  gameserver/config/hexid.txt, gameserver/data/geodata/geo_bugs.txt"/>
+		<zip destfile="build/L24Team_Source.zip" basedir="dist" update="true" excludes="gameserver/log/**, loginserver/log/**,  gameserver/config/hexid.txt, gameserver/data/geodata/geo_bugs.txt"/>
 	</target>
 	
 	<target name="cleanup" depends="adding-datapack" description="Cleaning the build folder.">
-		<delete file="${build.core}" />
-		<delete dir="${build.bin}" />
-		<delete dir="${build.dist}" />
+		<delete file="build/4TeamBR.jar" />
+		<delete dir="build/bin/com" />
+		<delete dir="build/dist" />
 	</target>
 
 </project>

@@ -4181,7 +4181,7 @@ public final class Config
 			if (Config.USE_SAY_FILTER)
 			{
 				loadFilter();
-			}			
+			}
 		}
 		else if (ServerType.serverMode == ServerType.MODE_LOGINSERVER)
 		{

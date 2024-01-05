@@ -587,9 +587,7 @@ public abstract class L2Summon extends L2PlayableInstance
 	public void useMagic(L2Skill skill, final boolean forceUse, final boolean dontMove)
 	{
 		
-		
 		// Check if the skill is active
-		
 		
 		// ************************************* Check Casting in Progress *******************************************
 		

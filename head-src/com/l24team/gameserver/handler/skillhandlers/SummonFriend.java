@@ -53,12 +53,7 @@ public class SummonFriend implements ISkillHandler
 			activePlayer.sendMessage("You cannot use this skill in Event.");
 			return;
 		}
-		if (activePlayer.inEventDM && DM.isStarted())
-		{
-			activePlayer.sendMessage("You cannot use this skill in Event.");
-			return;
-		}
-		if (activePlayer.inEventTvT && TvT.isStarted())
+		if ((activePlayer.inEventDM && DM.isStarted()) || (activePlayer.inEventTvT && TvT.isStarted()))
 		{
 			activePlayer.sendMessage("You cannot use this skill in Event.");
 			return;

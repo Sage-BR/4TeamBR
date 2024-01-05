@@ -79,22 +79,7 @@ public class ZoneCuboid extends L2ZoneShape
 		}
 		
 		// Horizontal lines may intersect vertical lines
-		if (lineIntersectsLine(zoneX1, zoneY1, zoneX2, zoneY1, ax1, ay1, ax1, ay2))
-		{
-			return true;
-		}
-		
-		if (lineIntersectsLine(zoneX1, zoneY1, zoneX2, zoneY1, ax2, ay1, ax2, ay2))
-		{
-			return true;
-		}
-		
-		if (lineIntersectsLine(zoneX1, zoneY2, zoneX2, zoneY2, ax1, ay1, ax1, ay2))
-		{
-			return true;
-		}
-		
-		if (lineIntersectsLine(zoneX1, zoneY2, zoneX2, zoneY2, ax2, ay1, ax2, ay2))
+		if (lineIntersectsLine(zoneX1, zoneY1, zoneX2, zoneY1, ax1, ay1, ax1, ay2) || lineIntersectsLine(zoneX1, zoneY1, zoneX2, zoneY1, ax2, ay1, ax2, ay2) || lineIntersectsLine(zoneX1, zoneY2, zoneX2, zoneY2, ax1, ay1, ax1, ay2) || lineIntersectsLine(zoneX1, zoneY2, zoneX2, zoneY2, ax2, ay1, ax2, ay2))
 		{
 			return true;
 		}

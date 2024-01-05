@@ -176,7 +176,7 @@ public class GameServer
 		logFolder = null;
 		
 		final long serverLoadStart = System.currentTimeMillis();
-			
+		
 		// Load GameServer Configs
 		Config.load();
 		

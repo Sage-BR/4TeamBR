@@ -59,14 +59,7 @@ public class OfflineShop implements IUserCommandHandler
 		
 		final TradeList storeListSell = player.getSellList();
 		
-		if (storeListSell == null)
-		{
-			player.sendMessage("Your sell list is empty.");
-			player.sendPacket(ActionFailed.STATIC_PACKET);
-			return false;
-		}
-		
-		if (storeListSell.getItemCount() == 0)
+		if ((storeListSell == null) || (storeListSell.getItemCount() == 0))
 		{
 			player.sendMessage("Your sell list is empty.");
 			player.sendPacket(ActionFailed.STATIC_PACKET);

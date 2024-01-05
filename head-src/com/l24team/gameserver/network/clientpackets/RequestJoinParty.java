@@ -97,12 +97,7 @@ public final class RequestJoinParty extends L2GameClientPacket
 			return;
 		}
 		
-		if (target.isInOlympiadMode() || requestor.isInOlympiadMode())
-		{
-			return;
-		}
-		
-		if (target.isInDuel() || requestor.isInDuel())
+		if (target.isInOlympiadMode() || requestor.isInOlympiadMode() || target.isInDuel() || requestor.isInDuel())
 		{
 			return;
 		}

@@ -475,15 +475,7 @@ public class L2FortSiegeGuardAI extends L2CharacterAI implements Runnable
 					{
 						for (final L2Skill sk : /* selfAnalysis.healSkills */healSkills)
 						{
-							if (actor.getCurrentMp() < sk.getMpConsume())
-							{
-								continue;
-							}
-							if (actor.isSkillDisabled(sk))
-							{
-								continue;
-							}
-							if (!Util.checkIfInRange(sk.getCastRange(), actor, cha, true))
+							if ((actor.getCurrentMp() < sk.getMpConsume()) || actor.isSkillDisabled(sk) || !Util.checkIfInRange(sk.getCastRange(), actor, cha, true))
 							{
 								continue;
 							}
@@ -537,15 +529,7 @@ public class L2FortSiegeGuardAI extends L2CharacterAI implements Runnable
 				{
 					for (final L2Skill sk : /* selfAnalysis.healSkills */healSkills)
 					{
-						if (actor.getCurrentMp() < sk.getMpConsume())
-						{
-							continue;
-						}
-						if (actor.isSkillDisabled(sk))
-						{
-							continue;
-						}
-						if (!Util.checkIfInRange(sk.getCastRange(), actor, npc, true))
+						if ((actor.getCurrentMp() < sk.getMpConsume()) || actor.isSkillDisabled(sk) || !Util.checkIfInRange(sk.getCastRange(), actor, npc, true))
 						{
 							continue;
 						}

@@ -49,12 +49,7 @@ public class ZoneCylinder extends L2ZoneShape
 		// Collision on any side of the rectangle?
 		if (zoneX > ax1 && zoneX < ax2)
 		{
-			if (Math.abs(zoneY - ay2) < zoneRad)
-			{
-				return true;
-			}
-			
-			if (Math.abs(zoneY - ay1) < zoneRad)
+			if ((Math.abs(zoneY - ay2) < zoneRad) || (Math.abs(zoneY - ay1) < zoneRad))
 			{
 				return true;
 			}
@@ -62,12 +57,7 @@ public class ZoneCylinder extends L2ZoneShape
 		
 		if (zoneY > ay1 && zoneY < ay2)
 		{
-			if (Math.abs(zoneX - ax2) < zoneRad)
-			{
-				return true;
-			}
-			
-			if (Math.abs(zoneX - ax1) < zoneRad)
+			if ((Math.abs(zoneX - ax2) < zoneRad) || (Math.abs(zoneX - ax1) < zoneRad))
 			{
 				return true;
 			}

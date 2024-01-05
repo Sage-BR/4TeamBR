@@ -89,11 +89,7 @@ public final class L2ArmorSet
 		{
 			return false;
 		}
-		if (headArmor != 0 && headArmor != head)
-		{
-			return false;
-		}
-		if (glovesArmor != 0 && glovesArmor != gloves)
+		if ((headArmor != 0 && headArmor != head) || (glovesArmor != 0 && glovesArmor != gloves))
 		{
 			return false;
 		}
@@ -191,11 +187,7 @@ public final class L2ArmorSet
 		{
 			return false;
 		}
-		if (glovesArmor != 0 && glovesItem.getEnchantLevel() < 6)
-		{
-			return false;
-		}
-		if (headArmor != 0 && headItem.getEnchantLevel() < 6)
+		if ((glovesArmor != 0 && glovesItem.getEnchantLevel() < 6) || (headArmor != 0 && headItem.getEnchantLevel() < 6))
 		{
 			return false;
 		}
