@@ -576,8 +576,7 @@ public class GameServer
 		EngineModsManager.loadScripts();
 		
 		Util.printSection("Project info");
-		LOGGER.info("Revision: " + Config.VERSION);
-		LOGGER.info("Build date: " + Config.BUILD_DATE);
+		LOGGER.info("Acesse: www.4teambr.com");
 		
 		Util.printSection("Info");
 		LOGGER.info("Operating system: " + Util.getOSName() + " " + Util.getOSVersion() + " " + Util.getOSArch());
@@ -599,17 +598,16 @@ public class GameServer
 		Util.printSection("Login");
 		loginThread = LoginServerThread.getInstance();
 		loginThread.start();
-		javolution.testing.Logger.logMe();
 		final SelectorConfig sc = new SelectorConfig();
 		sc.setMaxReadPerPass(NetcoreConfig.getInstance().MMO_MAX_READ_PER_PASS);
 		sc.setMaxSendPerPass(NetcoreConfig.getInstance().MMO_MAX_SEND_PER_PASS);
 		sc.setSleepTime(NetcoreConfig.getInstance().MMO_SELECTOR_SLEEP_TIME);
 		sc.setHelperBufferCount(NetcoreConfig.getInstance().MMO_HELPER_BUFFER_COUNT);
+		LOGGER.info("Thanks for Use 4TeamBR");
 		
 		gamePacketHandler = new L2GamePacketHandler();
 		
 		selectorThread = new SelectorThread<>(sc, gamePacketHandler, gamePacketHandler, gamePacketHandler, new IPv4Filter());
-		LOGGER.info("Thanks for Use 4TeamBR");
 		
 		InetAddress bindAddress = null;
 		if (!Config.GAMESERVER_HOSTNAME.equals("*"))

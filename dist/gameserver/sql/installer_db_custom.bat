@@ -13,7 +13,7 @@ set COMMAND="CREATE DATABASE IF NOT EXISTS "
 
 mysql -h %DBHOST% -u %USER% --password=%PASS% -e "%COMMAND:"=%%DBNAME:"=%;"
 
-for /r install/ %%f in (*.sql) do ( 
+for /r customs/ %%f in (*.sql) do ( 
         echo Installing table %%~nf ...
 		mysql -h %DBHOST% -u %USER% --password=%PASS% -D %DBNAME% < %%f
 	)
